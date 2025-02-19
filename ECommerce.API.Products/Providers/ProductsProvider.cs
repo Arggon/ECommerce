@@ -27,9 +27,9 @@ public class ProductsProvider : IProductsProvider
         if (_productsDbContext.Products.Any()) return;
         var products = new List<Db.Product>
         {
-            new Db.Product { Id = 1, Name = "Keyboard", Price = 20, Inventory = 100 },
-            new Db.Product { Id = 2, Name = "Mouse", Price = 10, Inventory = 50 },
-            new Db.Product { Id = 3, Name = "Monitor", Price = 100, Inventory = 10 }
+            new() { Id = 1, Name = "Keyboard", Price = 20, Inventory = 100 },
+            new() { Id = 2, Name = "Mouse", Price = 10, Inventory = 50 },
+            new() { Id = 3, Name = "Monitor", Price = 100, Inventory = 10 }
         };
 
         _productsDbContext.Products.AddRange(products);
