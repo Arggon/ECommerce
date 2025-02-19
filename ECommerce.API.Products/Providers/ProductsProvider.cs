@@ -9,15 +9,14 @@ namespace ECommerce.API.Products.Providers;
 public class ProductsProvider : IProductsProvider
 {
     private readonly ProductsDbContext _productsDbContext;
-    private readonly ILogger<ProductsProvider> _logger;
+    private readonly ILogger<ProductsProvider>? _logger;
     private readonly IMapper _mapper;
 
-    public ProductsProvider(ProductsDbContext productsDbContext, ILogger<ProductsProvider> logger, IMapper mapper)
+    public ProductsProvider(ProductsDbContext productsDbContext, ILogger<ProductsProvider>? logger, IMapper mapper)
     {
         _productsDbContext = productsDbContext;
         _logger = logger;
         _mapper = mapper;
-        _logger.LogInformation("ProductsProvider created");
 
         SeedData();
     }
@@ -47,7 +46,7 @@ public class ProductsProvider : IProductsProvider
             return (true, result, null);
 
         }
-        catch (Exception ex)
+        catch (Exception? ex)
         {
             _logger.LogError(ex, ex.Message);
             return (false, null, ex.Message);
@@ -63,7 +62,7 @@ public class ProductsProvider : IProductsProvider
             var result = _mapper.Map<Db.Product, Product>(product);
             return (true, result, null);
         }
-        catch (Exception ex)
+        catch (Exception? ex)
         {
             _logger.LogError(ex, ex.Message);
             return (false, null, ex.Message);
