@@ -11,6 +11,12 @@ builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 
 builder.Services.AddScoped<ISearchService, SearchService>();
+builder.Services.AddScoped<IOrderService, OrderService>();
+
+builder.Services.AddHttpClient("OrdersService", c =>
+{
+    c.BaseAddress = new Uri(builder.Configuration["Services:Orders"]!);
+});
 
 var app = builder.Build();
 
