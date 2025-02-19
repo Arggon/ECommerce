@@ -14,5 +14,10 @@ public class ProductController(IProductsProvider productsProvider) : ControllerB
         return result.isSuccess ? Ok(result.products) : NotFound(result.errorMessage);
     }
     
-    
+    [HttpGet("{id:int}")]
+    public async Task<IActionResult> GetProductAsync(int id)
+    {
+        var result = await productsProvider.GetProductAsync(id);
+        return result.isSuccess ? Ok(result.product) : NotFound(result.errorMessage);
+    }
 }

@@ -53,4 +53,20 @@ public class ProductsProvider : IProductsProvider
             return (false, null, ex.Message);
         }
     }
+
+    public async Task<(bool isSuccess, Product? product, string? errorMessage)> GetProductAsync(int id)
+    {
+        try
+        {
+            var product = await _productsDbContext.Products.FirstOrDefaultAsync(p => p.Id == id);
+            if (product == null) return (false, null, "Product not found");
+            var result = _mapper.Map<Db.Product, Product>(product);
+            return (true, result, null);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, ex.Message);
+            return (false, null, ex.Message);
+        }
+    }
 }
